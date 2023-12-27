@@ -1,0 +1,60 @@
+﻿@model Labs_3.Models.Department
+@{
+    Layout = "~/Views/Shared/_Create.cshtml";
+    ViewBag.Title = "Create Department";
+}
+
+<div class="container">
+    @using (Html.BeginForm("Create", "Department", FormMethod.Post))
+    {
+
+        <div class="form-group">
+            @Html.LabelFor(s => s.Dept_Id, new { @class = "form-label mt-4" })
+            @Html.TextBoxFor(s => s.Dept_Id, new { @class = "form-control" })
+            @Html.ValidationMessageFor(s => s.Dept_Id, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.Dept_Name, new { @class = "form-label mt-4" })
+            @Html.TextBoxFor(s => s.Dept_Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(S => S.Dept_Name, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.Dept_Desc, new { @class = "form-label mt-4" })
+            @Html.TextBoxFor(s => s.Dept_Desc, new { @class = "form-control" })
+            @Html.ValidationMessageFor(S => S.Dept_Desc, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.Dept_Location, new { @class = "form-label mt-4" })
+            @Html.TextBoxFor(s => s.Dept_Location, new { @class = "form-control" })
+            @Html.ValidationMessageFor(S => S.Dept_Location, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+
+            <label for="Dept_Id" class="form-label mt-4">Dept_Id</label>
+            <select class="form-select" id="Dept_Id" name="Dept_Id">
+                @{
+                    var found = ViewData["Instructor"] as List<Labs_3.Models.Instructor>;
+                    foreach (var item in found)
+                    {
+                        <option value="@item.Ins_Id">@item.Ins_Name</option>
+                    }
+                }
+            </select>
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.Hiredate, new { @class = "form-label mt-4" })
+            @Html.TextBoxFor(s => s.Hiredate, new { @class = "form-control" })
+            @Html.ValidationMessageFor(S => S.Hiredate, "", new { @class = "text-danger" })
+        </div>
+        <br />
+        <button type="submit" class="btn btn-outline-primary">Create</button>
+
+    }
+</div>
+
+@section ValidationJs{
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}
+

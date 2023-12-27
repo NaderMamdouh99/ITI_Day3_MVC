@@ -1,0 +1,72 @@
+﻿@model List<Labs_3.Models.Instructor>
+@{
+    Layout = "~/Views/Shared/_Company.cshtml";
+    ViewBag.Title = "Index";
+
+}
+<div class="container">
+    <h1>All Instructors</h1>
+    @{
+        if (TempData["Instructor"] != null)
+        {
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                @{
+                    var Instructor = TempData["Instructor"] as Labs_3.Models.Instructor;
+
+                }
+                Student With Id: @Instructor.Ins_Id  Created Successfully
+            </div>
+
+        }
+    }
+    <a href="/Instructor/Create">Create New Instructor</a>
+
+    <br />
+    <table class="table">
+        <tr>
+            <th>Ins_Id</th>
+            <th>Ins_Name</th>
+            <th>Ins_Degree</th>
+            <th>Dept_Id</th>
+            <th>Salary</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+        @{
+            foreach (var item in Model)
+            {
+
+
+
+                <tr>
+                    <td>@item.Ins_Id</td>
+                    <td>@item.Ins_Name</td>
+                    @{
+                        if (item.Ins_Degree == null)
+                        {
+                            <td>Not Have Degree</td>
+
+
+
+                        }
+                        else
+                        {
+                            <td>@item.Ins_Degree</td>
+
+                        }
+                    }
+                    <td>@item.Dept_Id</td>
+                    <td>@item.Salary</td>
+                    <td>
+                        <a class="btn btn-outline-danger" href="/Instructor/Delete?id=@item.Ins_Id">Delete</a>
+                    </td>
+                    <td>
+                        @Html.ActionLink("Update", "Update", "Instructor", new { id = item.Ins_Id }, new { @class = "btn btn-outline-success" })
+                    </td>
+                </tr>
+
+            }
+        }
+    </table>
+</div>

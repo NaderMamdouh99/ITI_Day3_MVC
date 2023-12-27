@@ -1,0 +1,56 @@
+﻿@model Labs_3.Models.Instructor
+@{
+    Layout = "~/Views/Shared/_Create.cshtml";
+    ViewBag.Title = "Create Instructor";
+}
+
+
+<div class="container">
+    @using (Html.BeginForm("Create", "Instructor", FormMethod.Post))
+    {
+
+        <div class="form-group">
+            @Html.LabelFor(s => s.Ins_Id, new { @class = "form-label mt-4" })
+            @Html.TextBoxFor(s => s.Ins_Id, new { @class = "form-control" })
+            @Html.ValidationMessageFor(s => s.Ins_Id, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.Ins_Name, new { @class = "form-label mt-4" })
+            @Html.TextBoxFor(s => s.Ins_Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(S => S.Ins_Name, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.Ins_Degree, new { @class = "form-label mt-4" })
+            @Html.TextBoxFor(s => s.Ins_Degree, new { @class = "form-control" })
+            @Html.ValidationMessageFor(S => S.Ins_Degree, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+
+            <label for="Dept_Id" class="form-label mt-4">Dept_Id</label>
+            <select class="form-select" id="Dept_Id" name="Dept_Id">
+                @{
+                    var found = ViewData["Departments"] as List<Labs_3.Models.Department>;
+                    foreach (var item in found)
+                    {
+                        <option value="@item.Dept_Id">@item.Dept_Name</option>
+                    }
+                }
+            </select>
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.Salary, new { @class = "form-label mt-4" })
+            @Html.TextBoxFor(s => s.Salary, new { @class = "form-control" })
+            @Html.ValidationMessageFor(S => S.Salary, "", new { @class = "text-danger" })
+        </div>
+        <br />
+        <button type="submit" class="btn btn-outline-primary">Create</button>
+
+    }
+
+</div>
+
+@section ValidationJs{
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+}

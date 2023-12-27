@@ -1,0 +1,74 @@
+﻿@model List<Labs_3.Models.Department>
+@{
+    Layout = "~/Views/Shared/_Company.cshtml";
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    <h1>All Department</h1>
+    @{
+        if (TempData["department"] != null)
+        {
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                @{
+                    var department = TempData["department"] as Labs_3.Models.Department;
+
+                }
+                Student With Id: @department.Dept_Id  Created Successfully
+            </div>
+
+        }
+    }
+    <a href="/Department/Create">Create New Department</a>
+
+    <br />
+    <table class="table">
+        <tr>
+            <th>Dept_Id</th>
+            <th>Dept_Name</th>
+            <th>Dept_Desc</th>
+            <th>Dept_Location</th>
+            <th>Dept_Manager</th>
+            <th>Hiredate</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+        @{
+            foreach (var item in Model)
+              {
+                <tr>
+                    <td>@item.Dept_Id</td>
+                    <td>@item.Dept_Name</td>
+                    <td>@item.Dept_Desc</td>
+                    <td>@item.Dept_Location</td>
+                    @{
+                        if (item.Dept_Manager == null)
+                        {
+                            <td>Not Have Manger</td>
+                        }
+                        else
+                        {
+                            <td>@item.Dept_Manager</td>
+
+
+
+                        }
+                        if (item.Hiredate == null)
+                        {
+                            <td>Not Have HireDate</td>
+                        }
+                        else
+                        {
+                            <td>@item.Hiredate</td>
+                        }
+                    }
+                    <td>
+                        <a class="btn btn-outline-danger" href="/Department/Delete?id=@item.Dept_Id">Delete</a>
+                    </td>
+                    <td>
+                        @Html.ActionLink("Update", "Update", "Department", new { id = item.Dept_Id }, new { @class = "btn btn-outline-success" })
+                    </td>
+                </tr>
+            }
+        }
+    </table>
